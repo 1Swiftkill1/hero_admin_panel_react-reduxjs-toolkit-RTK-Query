@@ -11,6 +11,12 @@
       "name": "Мороженное",
       "description": "пр",
       "element": "wind"
+    },
+    {
+      "id": "dc6e964a-1773-4995-9aa2-37d585277ce8",
+      "name": "Данил",
+      "description": "уацфв",
+      "element": "wind"
     }
   ],
   "filters": [
