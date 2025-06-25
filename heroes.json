@@ -1,15 +1,15 @@
 {
   "heroes": [
     {
-      "id": "4e815806-6aef-4e75-92bf-dcb09a095f18",
-      "name": "awd",
-      "description": "awdawd",
+      "id": "93d886f7-45f5-4ea0-afe8-5f1d88946ae2",
+      "name": "Данил",
+      "description": "awfe",
       "element": "water"
     },
     {
-      "id": "7c58ac8e-77fc-4fd3-b754-6b5fb1277ce1",
-      "name": "fgg",
-      "description": "dsrgdrg",
+      "id": "fa8b7417-7270-45c2-8ae6-352b104a5674",
+      "name": "Мороженное",
+      "description": "пр",
       "element": "wind"
     }
   ],

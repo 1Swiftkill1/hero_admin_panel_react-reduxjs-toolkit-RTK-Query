@@ -1,21 +1,18 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHttp } from '../../hooks/http.hook';
+import { useSelector } from 'react-redux';
 import { selectAll } from '../heroesFilters/heroesFiltersSlice';
 import { v4 as uuidv4 } from 'uuid';
-import { heroCreated } from '../heroesList/heroesSlice';
-
+import { useCreateHeroMutation } from '../../api/apiSlice';
 
 const HeroesAddForm = () => {
     const [heroName, setHeroName] = useState('');
     const [heroDescription, setHeroDescription] = useState('');
     const [heroElement, setHeroElement] = useState('');
 
+    const [createHero, { isLoading }] = useCreateHeroMutation();
+
     const filters = useSelector(selectAll);
     const filtersLoadingStatus = useSelector(state => state.filters.filtersLoadingStatus);
-
-    const dispatch = useDispatch();
-    const { request } = useHttp();
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -27,14 +24,13 @@ const HeroesAddForm = () => {
             element: heroElement
         };
 
-        request("http://localhost:3001/heroes", "POST", JSON.stringify(newHero))
-            .then(() => dispatch(heroCreated(newHero)))
+        createHero(newHero).unwrap()
             .then(() => {
                 setHeroName('');
                 setHeroDescription('');
                 setHeroElement('');
             })
-            .catch(err => console.log(err));
+            .catch(err => console.error('Ошибка при создании героя:', err));
     }
 
     const renderElements = (filters) => {
@@ -101,7 +97,18 @@ const HeroesAddForm = () => {
                 </select>
             </div>
 
-            <button type="submit" className="btn btn-primary">Создать</button>
+            <button 
+                type="submit" 
+                className="btn btn-primary"
+                disabled={isLoading}
+            >
+                {isLoading ? (
+                    <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Создание...
+                    </>
+                ) : 'Создать'}
+            </button>
         </form>
     )
 }
